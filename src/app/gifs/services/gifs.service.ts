@@ -13,7 +13,7 @@ export class GifsService {
 	public gifList: Gif[] = [];
 
 	private _tagsHistory: string[] = [];
-	private apiKey: string = 'dGMJW12nlHSz46O3sy81BZFryoPshmUk';
+	private apiKey: string = 'grMMxHtvgsHIPKxqvwMM8UYVhR68i7Kd';
 	private serviceUrl: string = 'https://api.giphy.com/v1/gifs';
 
 	constructor(private http: HttpClient) {
@@ -57,15 +57,9 @@ export class GifsService {
 
 		const params = new HttpParams()
 			.set('api_key', this.apiKey)
-			.set('limit', '10')
 			.set('q', tag)
 
 		this.http.get<SearchResponse>(`${this.serviceUrl}/search`, { params })
-			.subscribe(resp => {
-
-				this.gifList = resp.data;
-				// console.log({ gifs: this.gifList });
-
-			});
+			.subscribe(resp => this.gifList = resp.data);
 	}
 }
